@@ -7,11 +7,11 @@ use(solidity);
 describe("My Dapp", function () {
   let myContract;
 
-  describe("YourContract", function () {
-    it("Should deploy YourContract", async function () {
-      const YourContract = await ethers.getContractFactory("YourContract");
+  describe("Splitter", function () {
+    it("Should deploy Splitter", async function () {
+      const Splitter = await ethers.getContractFactory("Splitter");
 
-      myContract = await YourContract.deploy();
+      myContract = await Splitter.deploy();
     });
 
     describe("setPurpose()", function () {

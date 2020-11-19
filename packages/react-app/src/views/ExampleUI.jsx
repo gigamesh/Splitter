@@ -10,11 +10,11 @@ export default function ExampleUI({address, mainnetProvider, userProvider, local
   const [newPurpose, setNewPurpose] = useState("loading...");
 
   // keep track of a variable from the contract in the local React state:
-  const purpose = useContractReader(readContracts,"YourContract", "purpose")
+  const purpose = useContractReader(readContracts,"Splitter", "purpose")
   console.log("🤗 purpose:",purpose)
 
   //📟 Listen for broadcast events
-  const setPurposeEvents = useEventListener(readContracts, "YourContract", "SetPurpose", localProvider, 1);
+  const setPurposeEvents = useEventListener(readContracts, "Splitter", "SetPurpose", localProvider, 1);
   console.log("📟 SetPurpose events:",setPurposeEvents)
 
   /*
@@ -39,7 +39,7 @@ export default function ExampleUI({address, mainnetProvider, userProvider, local
           <Button onClick={()=>{
             console.log("newPurpose",newPurpose)
             /* look how you call setPurpose on your contract: */
-            tx( writeContracts.YourContract.setPurpose(newPurpose) )
+            tx( writeContracts.Splitter.setPurpose(newPurpose) )
           }}>Set Purpose</Button>
         </div>
 
@@ -87,7 +87,7 @@ export default function ExampleUI({address, mainnetProvider, userProvider, local
 
         Your Contract Address:
         <Address
-            value={readContracts?readContracts.YourContract.address:readContracts}
+            value={readContracts?readContracts.Splitter.address:readContracts}
             ensProvider={mainnetProvider}
             fontSize={16}
         />
@@ -97,7 +97,7 @@ export default function ExampleUI({address, mainnetProvider, userProvider, local
         <div style={{margin:8}}>
           <Button onClick={()=>{
             /* look how you call setPurpose on your contract: */
-            tx( writeContracts.YourContract.setPurpose("🍻 Cheers") )
+            tx( writeContracts.Splitter.setPurpose("🍻 Cheers") )
           }}>Set Purpose to "🍻 Cheers"</Button>
         </div>
 
@@ -108,7 +108,7 @@ export default function ExampleUI({address, mainnetProvider, userProvider, local
               here we are sending value straight to the contract's address:
             */
             tx({
-              to: writeContracts.YourContract.address,
+              to: writeContracts.Splitter.address,
               value: parseEther("0.001")
             });
             /* this should throw an error about "no fallback nor receive function" until you add it */
@@ -118,7 +118,7 @@ export default function ExampleUI({address, mainnetProvider, userProvider, local
         <div style={{margin:8}}>
           <Button onClick={()=>{
             /* look how we call setPurpose AND send some value along */
-            tx( writeContracts.YourContract.setPurpose("💵 Paying for this one!",{
+            tx( writeContracts.Splitter.setPurpose("💵 Paying for this one!",{
               value: parseEther("0.001")
             }))
             /* this will fail until you make the setPurpose function payable */
@@ -130,9 +130,9 @@ export default function ExampleUI({address, mainnetProvider, userProvider, local
           <Button onClick={()=>{
             /* you can also just craft a transaction and send it to the tx() transactor */
             tx({
-              to: writeContracts.YourContract.address,
+              to: writeContracts.Splitter.address,
               value: parseEther("0.001"),
-              data: writeContracts.YourContract.interface.encodeFunctionData("setPurpose(string)",["🤓 Whoa so 1337!"])
+              data: writeContracts.Splitter.interface.encodeFunctionData("setPurpose(string)",["🤓 Whoa so 1337!"])
             });
             /* this should throw an error about "no fallback nor receive function" until you add it */
           }}>Another Example</Button>
@@ -142,7 +142,7 @@ export default function ExampleUI({address, mainnetProvider, userProvider, local
 
       {/*
         📑 Maybe display a list of events?
-          (uncomment the event and emit line in YourContract.sol! )
+          (uncomment the event and emit line in Splitter.sol! )
       */}
       <div style={{ width:600, margin: "auto", marginTop:32, paddingBottom:32 }}>
         <h2>Events:</h2>

@@ -16,11 +16,14 @@
     "react-app:test": "yarn workspace @scaffold-eth/react-app test",
     "build": "yarn workspace @scaffold-eth/react-app build --max-old-space-size=12288",
     "chain": "yarn workspace @scaffold-eth/hardhat chain",
+    "shell:chain": "newsh \"yarn chain\"",
     "node": "yarn workspace @scaffold-eth/hardhat chain",
     "test": "yarn workspace @scaffold-eth/hardhat test",
     "start": "yarn workspace @scaffold-eth/react-app start",
+    "shell:start": "newsh \"yarn start\"",
     "compile": "yarn workspace @scaffold-eth/hardhat compile",
     "deploy": "yarn workspace @scaffold-eth/hardhat deploy",
+    "shell:deploy": "newsh \"yarn deploy\"",
     "watch": "yarn workspace @scaffold-eth/hardhat watch",
     "accounts": "yarn workspace @scaffold-eth/hardhat accounts",
     "balance": "yarn workspace @scaffold-eth/hardhat balance",
@@ -43,7 +46,8 @@
     "graph-remove-local": "yarn workspace @scaffold-eth/subgraph graph remove --node http://localhost:8020/ scaffold-eth/your-contract",
     "graph-deploy-local": "yarn workspace @scaffold-eth/subgraph graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 scaffold-eth/your-contract",
     "graph-ship-local": "yarn graph-prepare && yarn graph-codegen && yarn graph-deploy-local",
-    "deploy-and-graph": "yarn deploy && yarn graph-ship-local"
+    "deploy-and-graph": "yarn deploy && yarn graph-ship-local",
+    "dev": "npm-run-all -l --parallel shell:start shell:chain deploy"
   },
   "workspaces": {
     "packages": [
@@ -53,5 +57,14 @@
       "**/@graphprotocol/graph-ts",
       "**/@graphprotocol/graph-ts/**"
     ]
+  },
+  "devDependencies": {
+    "newsh": "^0.7.4",
+    "npm-run-all": "^4.1.5",
+    "wighawag_newsh": "^0.0.6"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.2.0",
+    "hardhat": "^2.0.3"
   }
 }
