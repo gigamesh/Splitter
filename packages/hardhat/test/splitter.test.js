@@ -1,6 +1,5 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const { stringify } = require('flatted');
 
 describe("Splitter", async function () {
   let splitter, alice, bob, carol, attacker;

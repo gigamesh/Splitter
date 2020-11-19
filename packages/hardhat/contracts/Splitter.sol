@@ -42,9 +42,7 @@ contract Splitter {
         );
         require(balances[msg.sender] > 0, "You have no balance");
 
-        // console.log(msg.sender, balances[msg.sender]);
         balances[msg.sender] = balances[msg.sender].sub(_amount);
-        // console.log("_amount:", _amount);
 
         (bool success, ) = msg.sender.call{value: _amount}("");
         require(success, "Transfer failed.");
